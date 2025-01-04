@@ -22,6 +22,7 @@ in {
   };
 
   config = mkIf config.programs.zsh.geometry.enable {
+    home.packages = [ pkgs.geometry ];
     programs.zsh.shellInit = ''
       if [ -f ${config.programs.zsh.geometry.path} ]; then
         source ${config.programs.zsh.geometry.path}
