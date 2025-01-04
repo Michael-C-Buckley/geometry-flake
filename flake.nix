@@ -13,7 +13,7 @@
       home-manager,
     }:
     {
-      packages = import ./packages.nix {inherit nixpkgs; };
+      packages = import ./packages.nix { inherit nixpkgs; };
 
       defaultPackage = {
         x86_64-linux = self.packages.x86_64-linux;
@@ -22,6 +22,20 @@
         aarch64-darwin = self.packages.aarch64-darwin;
       };
 
-      homeModules.default = import ./options.nix {inherit self; };
+      homeModules.default =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        import ./options.nix {
+          inherit
+            self
+            config
+            lib
+            pkgs
+            ;
+        };
     };
 }
