@@ -22,6 +22,6 @@
         aarch64-darwin = self.packages.aarch64-darwin;
       };
 
-      homeModules.default = import ./options.nix;
+      homeModules.default = import ./options.nix {inherit self; };
     };
 }

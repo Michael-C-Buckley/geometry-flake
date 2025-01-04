@@ -1,11 +1,13 @@
 # Home-Manager options
 
-{ config, lib, pkgs, ... }:
+{ self, config, lib, pkgs, ... }:
 
 with lib;
 
 let
   defaultPath = "${pkgs.geometry}/share/zsh/site-functions/geometry.zsh";
+  geometryConfig = config.programs.zsh.geometry;
+  geometryPackage = self.packages.${pkgs.system};
 in {
   options.programs.zsh.geometry = {
     enable = mkOption {
@@ -21,11 +23,11 @@ in {
     };
   };
 
-  config = mkIf config.programs.zsh.geometry.enable {
-    home.packages = [ pkgs.geometry ];
+  config = mkIf geometryConfig.enable {
+    home.packages = [ geometryPackage ];
     programs.zsh.shellInit = ''
-      if [ -f ${config.programs.zsh.geometry.path} ]; then
-        source ${config.programs.zsh.geometry.path}
+      if [ -f ${geometryConfig.path} ]; then
+        source ${geometryConfig.path}
       fi
     '';
   };
