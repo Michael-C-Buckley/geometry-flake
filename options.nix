@@ -5,9 +5,9 @@
 with lib;
 
 let
-  defaultPath = "${pkgs.geometry}/share/zsh/site-functions/geometry.zsh";
   geometryConfig = config.programs.zsh.geometry;
   geometryPackage = self.packages.${pkgs.system};
+  defaultPath = "${geometryPackage}/share/zsh/site-functions/geometry.zsh";
 in {
   options.programs.zsh.geometry = {
     enable = mkOption {
