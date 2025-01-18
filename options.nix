@@ -26,8 +26,8 @@ in {
   config = mkIf geometryConfig.enable {
     home.packages = [ geometryPackage ];
     programs.zsh.shellInit = ''
-      if [ -f ${geometryConfig.path} ]; then
-        source ${geometryConfig.path}
+      if [ -f ${toString geometryConfig.path} ]; then
+        source ${toString geometryConfig.path}
       fi
     '';
   };
